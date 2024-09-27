@@ -1,31 +1,24 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.9-slim'
-            args '-u root -w C:/app' // Use Windows path for working directory
+            image 'python:3.11-slim-buster' // Adjust Python version if needed
         }
     }
-    
+
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/ShijithDG/dockerConnection.git'
-            }
-        }
-        
         stage('Build') {
             steps {
-                bat 'pip install --no-cache-dir -r requirements.txt' // Use bat for Windows command
+                bat 'pip install --no-cache-dir -r requirements.txt'
             }
         }
-        
+
         stage('Test') {
             steps {
-                bat 'python -m unittest discover -s . -p "test_*.py"' // Use bat for Windows command
+                bat 'python -m unittest discover -s /app -p "test_*.py"'
             }
         }
     }
-    
+
     post {
         success {
             echo 'Tests passed!'

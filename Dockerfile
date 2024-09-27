@@ -1,14 +1,16 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.11-slim-buster
 
-# Set the working directory in the container
+# Install dependencies
+RUN pip install -r requirements.txt
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . .
+# Copy project files
+COPY . /app
 
-# Install any needed packages
-RUN pip install --no-cache-dir -r requirements.txt
+# Build the package
+RUN python setup.py sdist
 
-# Run the unit tests
-CMD ["python", "-m", "unittest", "discover", "-s", ".", "-p", "test_*.py"]
+# Run unit tests
+RUN python -m unittest discover tests
