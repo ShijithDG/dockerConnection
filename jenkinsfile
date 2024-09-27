@@ -23,7 +23,7 @@ pipeline {
         
         stage('Test') {
             steps {
-                // Run the unit tests
+                // run the test cases here
                 sh 'python -m unittest test_addition.py'
             }
         }
