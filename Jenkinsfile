@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-             image 'python:3.11-windowsservercore' // Make sure this image is correct
+             image 'python:3.11-slim' // Make sure this image is correct
              args '-w /app -v /c/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/app'
         }
     }
