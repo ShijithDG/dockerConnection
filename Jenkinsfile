@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.11-windowsservercore' // Use a Windows-based image
-            args '-w C:/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker -v C:/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:C:/app' // Adjust paths for Windows
+             image 'python:3.11-windowsservercore' // Make sure this image is correct
+             args '-w /app -v /c/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/app'
         }
     }
 
