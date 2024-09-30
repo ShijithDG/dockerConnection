@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'python:3.11-slim-buster'
-            
+            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/app'
         }
     }
 
