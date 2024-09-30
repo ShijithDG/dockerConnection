@@ -2,20 +2,20 @@ pipeline {
     agent {
         docker {
             image 'python:3.11-slim-buster'
-            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/app'
+            args '-w /app -v //c/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/app'
         }
     }
 
     stages {
         stage('Build') {
             steps {
-                bat 'pip install --no-cache-dir -r requirements.txt'
+                sh 'pip install --no-cache-dir -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'python -m unittest discover -s /app -p "test_*.py"'
+                sh 'python -m unittest discover -s . -p "test_*.py"'
             }
         }
     }
