@@ -2,8 +2,7 @@ pipeline {
     agent {
         docker {
              image 'python:3.11-slim' // Make sure this image is correct
-             args '-v /c/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/app'
-        }
+             args '-v C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\CheckingDocker:C:\\app -w C:\\app'        }
     }
 
     stages {
