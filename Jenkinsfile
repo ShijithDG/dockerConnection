@@ -1,7 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.11-slim-buster' // Adjust Python version if needed
+            image 'python:3.11-slim-buster'
+            
         }
     }
 
