@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'python:3.11-slim'
-            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/workspace'
+            args '-v C:/ProgramData/Jenkins/.jenkins/workspace/CheckingDocker:/workspace -w /workspace'
         }
     }
 
