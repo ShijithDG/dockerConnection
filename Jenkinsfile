@@ -11,13 +11,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'pip install --no-cache-dir -r requirements.txt'  // Use 'bat' for Windows commands
+                bat 'pip install --no-cache-dir -r requirements.txt'  
             }
         }
 
         stage('Test') {
             steps {
-                bat 'python -m unittest debugg.py '  // Use 'bat' for Windows commands
+                bat 'python -m unittest debugg.py '  
             }
         }
     }
@@ -25,6 +25,7 @@ pipeline {
     post {
         success {
             echo 'Tests passed!'
+            archiveArtifacts artifacts: 'dist/*.tar.gz', fingerprint: true
         }
         failure {
             echo 'Tests failed!'
