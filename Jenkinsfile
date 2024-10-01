@@ -9,13 +9,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'pip install --no-cache-dir -r requirements.txt' // Use 'sh' for Unix commands
+                bat 'pip install --no-cache-dir -r requirements.txt' // Use 'sh' for Unix commands
             }
         }
 
         stage('Test') {
             steps {
-                sh 'python -m unittest discover -s . -p "test_*.py"' // Use 'sh' for Unix commands
+                bat 'python -m unittest discover -s . -p "test_*.py"' // Use 'sh' for Unix commands
             }
         }
     }
