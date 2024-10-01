@@ -1,10 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.11-slim'
-            args '''-v C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\CheckingDocker:/workspace -w C:\\workspace'''
-        }
-    }
+    // agent {
+    //     docker {
+    //         image 'python:3.11-slim'
+    //         args '''-v C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\CheckingDocker:/workspace -w C:\\workspace'''
+    //     }
+    // }
+
+    agent any
 
     stages {
         stage('Build') {
