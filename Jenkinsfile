@@ -17,7 +17,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'python -m unittest discover -s . -p "test_*.py"'  // Use 'bat' for Windows commands
+                bat 'python -m unittest discover '  // Use 'bat' for Windows commands
             }
         }
     }
