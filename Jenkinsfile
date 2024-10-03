@@ -22,7 +22,6 @@ pipeline {
     post {
         success {
             echo 'Tests passed!'
-            archiveArtifacts artifacts: 'dist/*.tar.gz', fingerprint: true
         }
         failure {
             echo 'Tests failed!'
