@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'pip install --no-cache-dir -r requirements.txt'  
+                sh 'pip install --no-cache-dir -r requirements.txt'  
             }
         }
 
         stage('Test') {
             steps {
-                bat 'python -m unittest debugg.py '  
+                sh 'python -m unittest debugg.py '  
             }
         }
     }
