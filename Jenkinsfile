@@ -8,23 +8,40 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout scm // Checkout the code from the SCM (Git)
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                // Install dependencies listed in requirements.txt
+                sh 'pip install --no-cache-dir -r requirements.txt'
             }
         }
         stage('Build') {
             steps {
-                sh 'pip install -r requirements.txt' // Example command inside the Docker container
+                // Example command for building your application if needed
+                // If no specific build step is needed, you can skip this stage
+                echo 'Building application...'
+                // Add any build commands here, if applicable
             }
         }
         stage('Test') {
             steps {
-                sh 'python -m unittest debugg.py' // Run tests inside the container
+                // Run unit tests inside the container
+                sh 'python -m unittest test_calculator.py'
+            }
+        }
+        stage('Package') {
+            steps {
+                // Create an artifact to deploy (if needed)
+                sh 'tar -cvf my_app.tar.gz .'
             }
         }
         stage('Deploy to S3') {
             steps {
+                // Use AWS credentials to deploy the artifact to S3
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkin-user']]) {
-                    sh 'aws s3 cp your_file.txt s3://my-app-bucke --region eu-north-1'
+                    sh 'aws s3 cp my_app.tar.gz s3://my-app-bucke --region eu-north-1'
                 }
             }
         }
