@@ -6,8 +6,8 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the application files
-COPY calculator.py .
-COPY test_calculator.py .
+COPY add.py .
+COPY debugg.py .
 COPY setup.py .  # Ensure this is included if your project requires it
 COPY requirements.txt .  # Include requirements file if needed
 

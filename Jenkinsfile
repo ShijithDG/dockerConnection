@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'python -m unittest test_calculator.py' // Run tests inside the container
+                sh 'python -m unittest debugg.py' // Run tests inside the container
             }
         }
         stage('Deploy to S3') {
