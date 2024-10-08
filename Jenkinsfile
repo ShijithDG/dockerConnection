@@ -33,7 +33,7 @@ pipeline {
         stage('Package') {
             steps {
                 // Create an artifact to deploy
-                sh 'tar -cvf my_app.tar.gz app.py debugg.py requirements.txt' // Include necessary files
+                sh 'tar -cvf my_app.tar.gz add.py debugg.py requirements.txt' // Include necessary files
             }
         }
         stage('Deploy to S3') {
