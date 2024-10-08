@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // checkout scm // Checkout the code from the SCM (Git)
                 git url: 'https://github.com/ShijithDG/dockerConnection.git', branch: 'main'
             }
         }
@@ -20,22 +19,21 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // Example command for building your application if needed
-                // If no specific build step is needed, you can skip this stage
                 echo 'Building application...'
-                // Add any build commands here, if applicable
+                // Here you might want to create a distribution package or perform other build steps
+                // For example, if you had a setup.py for a package, you would run that here.
             }
         }
         stage('Test') {
             steps {
                 // Run unit tests inside the container
-                sh 'python -m unittest test_calculator.py'
+                sh 'python -m unittest debugg.py'
             }
         }
         stage('Package') {
             steps {
-                // Create an artifact to deploy (if needed)
-                sh 'tar -cvf my_app.tar.gz .'
+                // Create an artifact to deploy
+                sh 'tar -cvf my_app.tar.gz app.py debugg.py requirements.txt' // Include necessary files
             }
         }
         stage('Deploy to S3') {
