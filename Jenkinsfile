@@ -1,59 +1,40 @@
-// 
-
-
-
 pipeline {
     agent {
         docker {
-            image 'python:3.11-slim'
+            image 'python:3.9-slim' // Specify the Docker image to use
+            args '-u root:root'      // Optional: specify user and other Docker run options
         }
     }
-
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Build') {
             steps {
-                sh '''
-                    # Install AWS CLI
-                    apt-get update && apt-get install -y awscli
-                    
-                    # Install Python dependencies
-                    pip install --no-cache-dir -r requirements.txt
-                    
-                    # Build the package
-                    python setup.py sdist
-                '''
+                sh 'pip install -r requirements.txt' // Example command inside the Docker container
             }
         }
-
         stage('Test') {
             steps {
-                sh 'python -m unittest discover -s tests'
+                sh 'python -m unittest test_calculator.py' // Run tests inside the container
             }
         }
-
-        stage('Deploy to S3 (Optional)') {
+        stage('Deploy to S3') {
             steps {
-                withCredentials([
-                    [$class: 'AmazonS3CredentialsBinding',
-                    credentialsId: 'aws-jenkin-user',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']
-                ]) {
-                    script {
-                        // Replace with your actual package name
-                        sh 'aws s3 cp dist/simple_calculator-1.0.tar.gz s3://my-app-bucke/simple_calculator-1.0.tar.gz'
-                    }
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkin-user']]) {
+                    sh 'aws s3 cp your_file.txt s3://my-app-bucke --region eu-north-1'
                 }
             }
         }
     }
-
     post {
-        success {
-            echo 'Tests passed and deployment successful!'
+        always {
+            cleanWs()  // Clean workspace after pipeline execution
         }
         failure {
-            echo 'Tests failed or deployment failed!'
+            echo 'Pipeline failed!'
         }
     }
 }
