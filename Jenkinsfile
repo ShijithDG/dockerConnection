@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // checkout scm // Checkout the code from the SCM (Git)
-                git url: 'https://github.com/your-username/your-repo.git', branch: 'main'
+                git url: 'https://github.com/ShijithDG/dockerConnection.git', branch: 'main'
             }
         }
         stage('Install Dependencies') {
