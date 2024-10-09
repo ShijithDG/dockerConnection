@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/ShijithDG/dockerConnection.git', branch: 'main'
+                git url: 'https://github.com/ShijithDG/dockerConnection-awsDeployments.git', branch: 'main'
             }
         }
         stage('Install Dependencies') {
